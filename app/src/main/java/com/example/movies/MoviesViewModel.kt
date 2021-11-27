@@ -51,13 +51,24 @@ class MoviesViewModel : ViewModel() {
             }
     }
 }
+    fun showList(){
+        _movies.value = _movies.value
+    }
 
     fun showDetails(position: Int){
         val item = movies.value?.get(position)
-title.value = item?.title
+        title.value = item?.title
         overview.value = item?.overview
         poster.value = item?.posterPath
         releaseDate.value = item?.releaseDate
         rate.value = item?.voteAverage?.div(2)
+    }
+
+    fun search(movieName :String ){
+        val nameMovie = movies.value?.find { it?.title?.toLowerCase() == movieName.toLowerCase() }
+        val searchList = mutableListOf<ResultsItem?>()
+       searchList.add(nameMovie)
+        _movies.value = searchList
+
     }
 }

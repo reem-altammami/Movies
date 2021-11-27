@@ -26,6 +26,7 @@ class MovieDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 sharedViewModel.showDetails(movieIndex)
+
     }
 
     override fun onCreateView(
