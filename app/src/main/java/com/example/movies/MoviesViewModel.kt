@@ -61,7 +61,7 @@ class MoviesViewModel : ViewModel() {
         overview.value = item?.overview
         poster.value = item?.posterPath
         releaseDate.value = item?.releaseDate
-        rate.value = item?.voteAverage?.div(2)
+        rate.value = item?.voteAverage
     }
 
     fun search(movieName :String ){

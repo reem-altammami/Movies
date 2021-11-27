@@ -59,12 +59,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/movie_name"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:layout_marginTop="16dp"
             android:padding="8dp"
+            android:layout_marginStart="10dp"
             android:text="@={viewModel.releaseDate}"/>
+        <TextView
+            android:id="@+id/rate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/release_date"
+            app:layout_constraintBottom_toBottomOf="@id/release_date"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:drawableStart="@drawable/ic_star_rate"
+            android:drawablePadding="3dp"
+            android:textSize="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="10dp"
+            android:padding="8dp"
+            android:text="@{viewModel.rate.toString()}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
