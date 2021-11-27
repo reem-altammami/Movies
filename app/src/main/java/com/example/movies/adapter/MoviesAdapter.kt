@@ -22,7 +22,7 @@ class MoviesAdapter : ListAdapter<ResultsItem,MoviesAdapter.MovieViewHolder>(Dif
             binding.executePendingBindings()
 
         }
-        val button :Button = binding.button
+        val card  = binding.movieCard
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -32,9 +32,9 @@ class MoviesAdapter : ListAdapter<ResultsItem,MoviesAdapter.MovieViewHolder>(Dif
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movieItem = getItem(position)
         holder.bind(movieItem)
-        holder.button.setOnClickListener {
+        holder.card.setOnClickListener {
             val action = MoviesListFragmentDirections.actionMoviesListFragmentToMovieDetailsFragment(position)
-            holder.button.findNavController().navigate(action)
+            holder.card.findNavController().navigate(action)
         }
 
     }

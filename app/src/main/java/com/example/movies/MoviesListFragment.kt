@@ -33,6 +33,8 @@ class MoviesListFragment : Fragment() {
 
 
     }
+
+
     fun goDetelis(){
 
     }

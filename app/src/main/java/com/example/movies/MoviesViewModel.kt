@@ -24,6 +24,12 @@ class MoviesViewModel : ViewModel() {
 
     // The external immutable LiveData for the request status
     val status: LiveData<MoviesApiStatus> = _status
+    val title = MutableLiveData<String>()
+    val overview = MutableLiveData<String>()
+    val poster = MutableLiveData<String>()
+    val releaseDate = MutableLiveData<String>()
+
+
 
     init {
         getMoviesList()
@@ -31,6 +37,8 @@ class MoviesViewModel : ViewModel() {
 
     private fun getMoviesList() {
         viewModelScope.launch {
+            _status.value = MoviesApiStatus.LOADING
+
             try {
                 val listResult = MoviesApi.retrofitService.getMovies()
                 _status.value = MoviesApiStatus.DONE
@@ -42,4 +50,12 @@ class MoviesViewModel : ViewModel() {
             }
     }
 }
+
+    fun showDetails(position: Int){
+        val item = movies.value?.get(position)
+title.value = item?.title
+        overview.value = item?.overview
+        poster.value = item?.posterPath
+        releaseDate.value = item?.releaseDate
+    }
 }
