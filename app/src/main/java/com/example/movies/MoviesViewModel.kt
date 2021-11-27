@@ -8,7 +8,7 @@ import com.example.movies.data.Response
 import com.example.movies.data.ResultsItem
 import com.example.movies.network.MoviesApi
 import kotlinx.coroutines.launch
-
+import java.text.SimpleDateFormat
 
 
 enum class MoviesApiStatus{
@@ -28,6 +28,7 @@ class MoviesViewModel : ViewModel() {
     val overview = MutableLiveData<String>()
     val poster = MutableLiveData<String>()
     val releaseDate = MutableLiveData<String>()
+    val rate = MutableLiveData<Double>()
 
 
 
@@ -57,5 +58,6 @@ title.value = item?.title
         overview.value = item?.overview
         poster.value = item?.posterPath
         releaseDate.value = item?.releaseDate
+        rate.value = item?.voteAverage?.div(2)
     }
 }
