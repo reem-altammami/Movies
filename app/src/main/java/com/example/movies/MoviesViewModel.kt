@@ -52,7 +52,7 @@ class MoviesViewModel : ViewModel() {
     }
 }
     fun showList(){
-        _movies.value = _movies.value
+        getMoviesList()
     }
 
     fun showDetails(position: Int){
