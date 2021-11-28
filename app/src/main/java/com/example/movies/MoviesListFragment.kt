@@ -4,19 +4,24 @@ import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.movies.adapter.MoviesAdapter
+import com.example.movies.data.ResultsItem
 import com.example.movies.databinding.FragmentMoviesListBinding
+import java.text.SimpleDateFormat
 import java.util.*
 
 
 class MoviesListFragment : Fragment() {
+
     private var _binding: FragmentMoviesListBinding? = null
     private val binding get() = _binding!!
     private val sharedViewModel : MoviesViewModel by activityViewModels()
@@ -44,12 +49,8 @@ class MoviesListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//
-//        binding.search.setOnCloseListener(object : SearchView.OnCloseListener{
-//            override fun onClose(): Boolean {
-//                sharedViewModel.showList()
-//            return false}
-//        })
+
+        binding.sortList.setOnClickListener { showSortPopupMenu(binding.sortList) }
         binding.search.setOnQueryTextListener (object : SearchView.OnQueryTextListener {
 
 
@@ -75,6 +76,37 @@ class MoviesListFragment : Fragment() {
 
         })
 
+    }
+//
+
+    private fun showSortPopupMenu(view: View) {
+        val popup = PopupMenu(this.requireContext(), view)
+        popup.inflate(R.menu.sort_menu)
+
+        popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item: MenuItem? ->
+
+            when (item!!.itemId) {
+
+                R.id.sort_alpha -> {
+                    sharedViewModel.sortListAlpha()
+                }
+                R.id.release_date-> {
+                    sharedViewModel.sortListReleaseDate()
+                }
+                R.id.rate-> {
+                   sharedViewModel.sortListRate()
+                }
+
+                R.id.un_sorted -> {
+                   sharedViewModel.showList()
+                }
+
+            }
+
+            true
+        })
+
+        popup.show()
     }
 
 }

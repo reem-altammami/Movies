@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/sort_alpha"
+        android:title="A-Z"
+        />
+    <item
+        android:id="@+id/rate"
+        android:title="Rate"
+        />
+    <item
+        android:id="@+id/release_date"
+        android:title="Release Date"
+        />
+    <item
+        android:id="@+id/un_sorted"
+        android:title="Reset"
+        app:showAsAction="never"
+        />
+
+</menu>
