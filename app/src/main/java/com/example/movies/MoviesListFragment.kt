@@ -2,11 +2,9 @@ package com.example.movies
 
 import android.opengl.Visibility
 import android.os.Bundle
+import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.SearchView
@@ -16,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.movies.adapter.MoviesAdapter
 import com.example.movies.data.ResultsItem
 import com.example.movies.databinding.FragmentMoviesListBinding
+import com.example.movies.network.MovieApiFilter
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -28,6 +27,7 @@ class MoviesListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
@@ -42,6 +42,7 @@ class MoviesListFragment : Fragment() {
         binding.viewModel = sharedViewModel
         binding.listFragment = this
         binding.gridRecyclerView.adapter = MoviesAdapter()
+        setHasOptionsMenu(true)
 
         return binding.root
 
@@ -51,6 +52,7 @@ class MoviesListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         binding.sortList.setOnClickListener { showSortPopupMenu(binding.sortList) }
+        binding.filterList.setOnClickListener { showFilterPopupMenu(binding.filterList) }
         binding.search.setOnQueryTextListener (object : SearchView.OnQueryTextListener {
 
 
@@ -108,6 +110,54 @@ class MoviesListFragment : Fragment() {
 
         popup.show()
     }
+    private fun showFilterPopupMenu(view: View) {
+        val popup = PopupMenu(this.requireContext(), view)
+        popup.inflate(R.menu.filter_menu)
+
+        popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item: MenuItem? ->
+
+            when (item!!.itemId) {
+
+                R.id.filter_action -> {
+                    sharedViewModel.updateFilter(MovieApiFilter.ACTION)
+                }
+                R.id.filter_animation-> {
+                    sharedViewModel.updateFilter(MovieApiFilter.ANIMATION)
+                }
+                R.id.filter_adventure-> {
+                    sharedViewModel.updateFilter(MovieApiFilter.ADVENTURE)
+                }
+
+                R.id.reset-> {
+                    sharedViewModel.getMoviesList()
+                }
+
+            }
+
+            true
+        })
+
+        popup.show()
+    }
+
+
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        inflater.inflate(R.menu.filter_menu , menu)
+//        super.onCreateOptionsMenu(menu, inflater)
+//    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        sharedViewModel.updateFilter(
+//            when(item.itemId){
+//                R.id.filter_action -> MovieApiFilter.ACTION
+//                R.id.filter_animation -> MovieApiFilter.ANIMATION
+//                Log.e("TAGB","animation:${MovieApiFilter.ANIMATION}"),
+//                R.id.filter_drama -> MovieApiFilter.Drama
+//                else ->MovieApiFilter.ADVENTURE
+//            }
+//        )
+//      return  true
+//    }
 
 }
 

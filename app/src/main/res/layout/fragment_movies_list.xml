@@ -23,7 +23,7 @@
            android:id="@+id/search"
            app:layout_constraintStart_toStartOf="parent"
          app:layout_constraintTop_toTopOf="parent"
-           android:layout_width="300dp"
+           android:layout_width="265dp"
            android:layout_margin="8dp"
               android:layout_height="wrap_content"
            android:background="@drawable/background"
@@ -31,15 +31,26 @@
 
    <com.google.android.material.chip.Chip
        android:id="@+id/sort_list"
-       android:layout_width="80dp"
+       android:layout_width="75dp"
        android:layout_height="60dp"
-       android:layout_marginEnd="5dp"
        app:chipCornerRadius="15dp"
        android:text="Sort"
        app:layout_constraintBottom_toBottomOf="@id/search"
        app:layout_constraintEnd_toEndOf="parent"
        app:layout_constraintTop_toTopOf="@id/search"
        app:chipIcon="@drawable/ic_sort"
+       app:chipBackgroundColor="#00FFF6F6"/>
+   <com.google.android.material.chip.Chip
+       android:id="@+id/filter_list"
+       android:layout_width="75dp"
+       android:layout_height="60dp"
+
+       app:chipCornerRadius="15dp"
+       android:text="Filter"
+       app:layout_constraintBottom_toBottomOf="@id/search"
+       app:layout_constraintEnd_toStartOf="@id/sort_list"
+       app:layout_constraintTop_toTopOf="@id/search"
+       app:chipIcon="@drawable/ic_filter"
        app:chipBackgroundColor="#00FFF6F6"/>
 
    <ImageView

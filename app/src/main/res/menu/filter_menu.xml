@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/filter_action"
+        android:title="Action"
+        />
+    <item
+        android:id="@+id/filter_animation"
+        android:title="Animation"
+        />
+    <item
+        android:id="@+id/filter_adventure"
+        android:title="Adventure"
+        />
 
+    <item
+        android:id="@+id/reset"
+        android:title="Reset"
 
+        />
 </menu>

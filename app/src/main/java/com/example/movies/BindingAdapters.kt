@@ -39,9 +39,6 @@ fun bindImage(imgView:ImageView , imgUrl:String){
         Log.e("TAG","uri:${imgUri}")
 
 
-//        imgView.load("https://image.tmdb.org/t/p/w500"+imgUri){
-//            placeholder(R.drawable.loading_animation)
-//            error(R.drawable.ic_broken_image)
         }
 
     }

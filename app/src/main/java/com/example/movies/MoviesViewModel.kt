@@ -6,7 +6,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.movies.data.Movie
 import com.example.movies.data.ResultsItem
+import com.example.movies.network.MovieApiFilter
 import com.example.movies.network.MoviesApi
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -26,37 +28,59 @@ class MoviesViewModel : ViewModel() {
 
     // The external immutable LiveData for the request status
     val status: LiveData<MoviesApiStatus> = _status
+
+    private val _movieDetails = MutableLiveData<Movie?>()
+
+    // The external immutable LiveData for the request status
+    var movieDetails: MutableLiveData<Movie?> = _movieDetails
+
+
     val title = MutableLiveData<String>()
     val overview = MutableLiveData<String>()
     val poster = MutableLiveData<String>()
     val releaseDate = MutableLiveData<String>()
     val releaseYear = MutableLiveData<String>()
     val rate = MutableLiveData<Double>()
-
+    val genreList = MutableLiveData<MutableList<String>>()
 
 
     init {
         getMoviesList()
     }
 
-    private fun getMoviesList() {
+     fun getMoviesList() {
         viewModelScope.launch {
             _status.value = MoviesApiStatus.LOADING
 
             try {
-                val listResult = MoviesApi.retrofitService.getMovies()
+                val listResult = MoviesApi.retrofitService.getMovies(4)
                 _status.value = MoviesApiStatus.DONE
                 _movies.value = listResult.results
             } catch (e: Exception) {
                 _status.value = MoviesApiStatus.ERROR
-                _movies.value= listOf()
+                _movies.value = listOf()
 
             }
+        }
     }
-}
-    fun showList(){
+    fun getMovieGenre(filter: MovieApiFilter){
+
+        viewModelScope.launch {
+            try{
+                val listMovieGenre = MoviesApi.retrofitService.getMoviese(filter.genre)
+                _movies.value = listMovieGenre.results
+            } catch (e: java.lang.Exception){
+
+            }
+        }
+    }
+
+
+    fun showList() {
         getMoviesList()
     }
+
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun showDetails(position: Int){
@@ -69,29 +93,38 @@ class MoviesViewModel : ViewModel() {
         getYear(releaseDate.value)
     }
 
-    fun search(movieName :String ){
+    fun search(movieName: String) {
         val nameMovie = movies.value?.find { it?.title?.toLowerCase() == movieName.toLowerCase() }
         val searchList = mutableListOf<ResultsItem?>()
-       searchList.add(nameMovie)
+        searchList.add(nameMovie)
         _movies.value = searchList
 
     }
-    fun sortListAlpha(){
+
+    fun sortListAlpha() {
         val sortedList = movies.value?.sortedBy { it?.title?.toLowerCase() }
         _movies.value = sortedList
     }
-    fun sortListRate(){
+
+    fun sortListRate() {
         val sortedList = movies.value?.sortedBy { it?.voteAverage!! }
         _movies.value = sortedList
     }
-    fun sortListReleaseDate(){
-        val sortedList = movies.value?.sortedBy { SimpleDateFormat("yyyy-MM-dd").parse(it?.releaseDate!!)}
+
+    fun sortListReleaseDate() {
+        val sortedList =
+            movies.value?.sortedBy { SimpleDateFormat("yyyy-MM-dd").parse(it?.releaseDate!!) }
         _movies.value = sortedList
     }
+
     @RequiresApi(Build.VERSION_CODES.O)
-    fun getYear(release: String?){
+    fun getYear(release: String?) {
         val date = LocalDate.parse(release)
         releaseYear.value = date.year.toString()
     }
 
+
+    fun updateFilter(filter:MovieApiFilter){
+        getMovieGenre(filter)
+    }
 }
