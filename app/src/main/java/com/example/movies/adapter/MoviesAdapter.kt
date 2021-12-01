@@ -33,7 +33,7 @@ class MoviesAdapter : ListAdapter<ResultsItem,MoviesAdapter.MovieViewHolder>(Dif
         val movieItem = getItem(position)
         holder.bind(movieItem)
         holder.card.setOnClickListener {
-            val action = MoviesListFragmentDirections.actionMoviesListFragmentToMovieDetailsFragment(position)
+            val action = MoviesListFragmentDirections.actionMoviesListFragmentToMovieDetailsFragment(movieItem.id!!)
             holder.card.findNavController().navigate(action)
         }
 

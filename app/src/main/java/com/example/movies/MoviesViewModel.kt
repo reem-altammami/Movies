@@ -29,19 +29,6 @@ class MoviesViewModel : ViewModel() {
     // The external immutable LiveData for the request status
     val status: LiveData<MoviesApiStatus> = _status
 
-    private val _movieDetails = MutableLiveData<Movie?>()
-
-    // The external immutable LiveData for the request status
-    var movieDetails: MutableLiveData<Movie?> = _movieDetails
-
-
-    val title = MutableLiveData<String>()
-    val overview = MutableLiveData<String>()
-    val poster = MutableLiveData<String>()
-    val releaseDate = MutableLiveData<String>()
-    val releaseYear = MutableLiveData<String>()
-    val rate = MutableLiveData<Double>()
-    val genreList = MutableLiveData<MutableList<String>>()
 
 
     init {
@@ -67,7 +54,7 @@ class MoviesViewModel : ViewModel() {
 
         viewModelScope.launch {
             try{
-                val listMovieGenre = MoviesApi.retrofitService.getMoviese(filter.genre)
+                val listMovieGenre = MoviesApi.retrofitService.getMoviesByGenre(filter.genre)
                 _movies.value = listMovieGenre.results
             } catch (e: java.lang.Exception){
 
@@ -81,17 +68,6 @@ class MoviesViewModel : ViewModel() {
     }
 
 
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun showDetails(position: Int){
-        val item = movies.value?.get(position)
-        title.value = item?.title
-        overview.value = item?.overview
-        poster.value = item?.posterPath
-        releaseDate.value = item?.releaseDate
-        rate.value = item?.voteAverage
-        getYear(releaseDate.value)
-    }
 
     fun search(movieName: String) {
         val nameMovie = movies.value?.find { it?.title?.toLowerCase() == movieName.toLowerCase() }
@@ -115,12 +91,6 @@ class MoviesViewModel : ViewModel() {
         val sortedList =
             movies.value?.sortedBy { SimpleDateFormat("yyyy-MM-dd").parse(it?.releaseDate!!) }
         _movies.value = sortedList
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun getYear(release: String?) {
-        val date = LocalDate.parse(release)
-        releaseYear.value = date.year.toString()
     }
 
 

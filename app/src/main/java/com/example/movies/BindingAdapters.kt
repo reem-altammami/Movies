@@ -19,7 +19,7 @@ fun bindRecyclerView(recyclerView: RecyclerView , data:List<ResultsItem>?){
 }
 
 @BindingAdapter("poster")
-fun bindImage(imgView:ImageView , imgUrl:String){
+fun bindImage(imgView:ImageView , imgUrl:String?){
 
     imgUrl?.let {
 //        val imageLoader = ImageLoader.Builder(imgView.context)

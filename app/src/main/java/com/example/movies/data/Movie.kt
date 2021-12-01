@@ -1,6 +1,10 @@
 package com.example.movies.data
 
+import android.os.Build
+import android.util.Log
+import androidx.annotation.RequiresApi
 import com.squareup.moshi.Json
+import java.time.LocalDate
 
 data class Movie(
 
@@ -78,7 +82,14 @@ data class Movie(
 
 	@Json(name="status")
 	val status: String? = null
-)
+){
+	@RequiresApi(Build.VERSION_CODES.O)
+	fun getYear() :String{
+
+		val date = LocalDate.parse(releaseDate)
+		return date.year.toString()
+	}
+}
 
 data class SpokenLanguagesItem(
 

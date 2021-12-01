@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/moviesListFragment"
         android:name="com.example.movies.MoviesListFragment"
-        android:label="fragment_movies_list"
+        android:label="Popular Movies"
         tools:layout="@layout/fragment_movies_list" >
         <action
             android:id="@+id/action_moviesListFragment_to_movieDetailsFragment"
@@ -21,7 +21,7 @@
         android:label="fragment_movie_details"
         tools:layout="@layout/fragment_movie_details" >
         <argument
-            android:name="index"
+            android:name="movieId"
             app:argType="integer" />
     </fragment>
 </navigation>

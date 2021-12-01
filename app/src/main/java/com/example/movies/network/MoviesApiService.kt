@@ -31,9 +31,11 @@ interface MoviesApiService {
 
 
     @GET("/3/movie/popular?api_key=a06d47a0011d67e6a6c69f40321a686c")
-    suspend fun getMoviese(@Query("with_genres")genreId:Int): Response
-//    @GET("popular?api_key=a06d47a0011d67e6a6c69f40321a686c")
-//    suspend fun getMovieByGenre(@Query("page")pageNo:Int,@Query("with_genre")genreId:Int): Response
+    suspend fun getMoviesByGenre(@Query("with_genres")genreId:Int): Response
+
+    @GET("/3/movie/{id}?api_key=a06d47a0011d67e6a6c69f40321a686c")
+    suspend fun getMovieDetails(@Path("id") movieId:Int) : Movie
+
 }
 
 object MoviesApi {
