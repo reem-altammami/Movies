@@ -25,6 +25,7 @@ class DetailsViewModel:ViewModel (){
     var movieDetails: MutableLiveData<Movie?> = _movieDetails
 
 
+
     fun getMovieDetails(id: Int) {
         Log.e("TAG", "getMovieDetails out  lan out try:${id}")
         viewModelScope.launch {
