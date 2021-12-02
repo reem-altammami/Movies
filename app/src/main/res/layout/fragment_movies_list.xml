@@ -44,7 +44,6 @@
        android:id="@+id/filter_list"
        android:layout_width="75dp"
        android:layout_height="60dp"
-
        app:chipCornerRadius="15dp"
        android:text="Filter"
        app:layout_constraintBottom_toBottomOf="@id/search"

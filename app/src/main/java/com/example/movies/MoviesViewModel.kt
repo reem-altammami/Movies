@@ -89,7 +89,7 @@ class MoviesViewModel : ViewModel() {
 
     fun sortListReleaseDate() {
         val sortedList =
-            movies.value?.sortedBy { SimpleDateFormat("yyyy-MM-dd").parse(it?.releaseDate!!) }
+            movies.value?.sortedByDescending { SimpleDateFormat("yyyy-MM-dd").parse(it?.releaseDate!!) }
         _movies.value = sortedList
     }
 

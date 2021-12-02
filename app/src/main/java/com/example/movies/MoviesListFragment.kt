@@ -128,7 +128,7 @@ class MoviesListFragment : Fragment() {
                     sharedViewModel.updateFilter(MovieApiFilter.ADVENTURE)
                 }
 
-                R.id.reset-> {
+                R.id.show_all-> {
                     sharedViewModel.getMoviesList()
                 }
 

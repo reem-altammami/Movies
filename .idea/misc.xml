@@ -5,7 +5,7 @@
       <map>
         <entry key="..\:/Movies/app/src/main/res/drawable/background.xml" value="0.1" />
         <entry key="..\:/Movies/app/src/main/res/drawable/ic_broken_image.xml" value="0.11944444444444445" />
-        <entry key="..\:/Movies/app/src/main/res/layout/fragment_movie_details.xml" value="0.1" />
+        <entry key="..\:/Movies/app/src/main/res/layout/fragment_movie_details.xml" value="0.23581560283687944" />
         <entry key="..\:/Movies/app/src/main/res/layout/fragment_movies_list.xml" value="0.31223628691983124" />
         <entry key="..\:/Movies/app/src/main/res/layout/grid_view_item.xml" value="0.1639773222852159" />
         <entry key="..\:/Movies/app/src/main/res/menu/filter_menu.xml" value="0.2857142857142857" />
