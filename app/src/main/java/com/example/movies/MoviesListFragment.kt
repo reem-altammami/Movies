@@ -53,9 +53,8 @@ class MoviesListFragment : Fragment() {
 
         binding.sortList.setOnClickListener { showSortPopupMenu(binding.sortList) }
         binding.filterList.setOnClickListener { showFilterPopupMenu(binding.filterList) }
+
         binding.search.setOnQueryTextListener (object : SearchView.OnQueryTextListener {
-
-
             override fun onQueryTextSubmit(query: String): Boolean {
                 if (query != null) {
                     val b =

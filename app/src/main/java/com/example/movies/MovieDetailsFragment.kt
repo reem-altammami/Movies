@@ -48,6 +48,7 @@ class MovieDetailsFragment : Fragment() {
             (requireActivity() as AppCompatActivity).supportActionBar?.title=it?.title
 
         })
+
         binding.shareimagebutton.setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND)
                 .putExtra(Intent.EXTRA_TEXT," ${sharedViewModel.movieDetails.value?.title} link : https://www.themoviedb.org/movie/${sharedViewModel.movieDetails.value?.id}")
@@ -56,7 +57,6 @@ class MovieDetailsFragment : Fragment() {
                     startActivity(intent)
                 }
         }
-
 
 
         return binding.root    }
