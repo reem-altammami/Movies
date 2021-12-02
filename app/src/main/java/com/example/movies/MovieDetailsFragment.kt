@@ -1,5 +1,6 @@
 package com.example.movies
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -47,6 +48,16 @@ class MovieDetailsFragment : Fragment() {
             (requireActivity() as AppCompatActivity).supportActionBar?.title=it?.title
 
         })
+        binding.shareimagebutton.setOnClickListener {
+            val intent = Intent(Intent.ACTION_SEND)
+                .putExtra(Intent.EXTRA_TEXT," ${sharedViewModel.movieDetails.value?.title} link : https://www.themoviedb.org/movie/${sharedViewModel.movieDetails.value?.id}")
+                .setType("text/plain")
+                if (activity?.packageManager?.resolveActivity(intent , 0) !=null){
+                    startActivity(intent)
+                }
+        }
+
+
 
         return binding.root    }
 
