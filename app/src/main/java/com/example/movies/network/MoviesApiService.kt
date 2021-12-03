@@ -43,7 +43,7 @@ object MoviesApi {
         retrofit.create(MoviesApiService::class.java) }
 }
 
-
+// use it for filter movies by genre
 enum class MovieApiFilter(val genre:Int){
     ACTION (28),
     ADVENTURE (12),

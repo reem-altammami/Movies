@@ -13,11 +13,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import com.example.movies.databinding.FragmentMovieDetailsBinding
 import com.example.movies.details.DetailsViewModel
+import android.R
+import androidx.appcompat.widget.Toolbar
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 
 
 class MovieDetailsFragment : Fragment() {
 
-    private val sharedViewModel : DetailsViewModel by activityViewModels()
+    private val sharedViewModel: DetailsViewModel by activityViewModels()
     var movieId: Int = 0
 
 
@@ -40,29 +44,41 @@ class MovieDetailsFragment : Fragment() {
         binding.lifecycleOwner = this.viewLifecycleOwner
         binding.viewModel = sharedViewModel
 
-        Log.e("TAG","Reem 110 :${movieId}")
+        Log.e("TAG", "Reem 110 :${movieId}")
 
         sharedViewModel.getMovieDetails(movieId)
-
-        sharedViewModel.movieDetails?.observe(this.viewLifecycleOwner,{
-            (requireActivity() as AppCompatActivity).supportActionBar?.title=it?.title
+        sharedViewModel.movieDetails?.observe(this.viewLifecycleOwner, {
+            (requireActivity() as AppCompatActivity).supportActionBar?.title = it?.title
 
         })
-
-        binding.shareimagebutton.setOnClickListener {
+// share content
+        binding.shear.setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND)
-                .putExtra(Intent.EXTRA_TEXT," ${sharedViewModel.movieDetails.value?.title} link : https://www.themoviedb.org/movie/${sharedViewModel.movieDetails.value?.id}")
+                .putExtra(
+                    Intent.EXTRA_TEXT,
+                    " ${sharedViewModel.movieDetails.value?.title} link : https://www.themoviedb.org/movie/${sharedViewModel.movieDetails.value?.id}"
+                )
                 .setType("text/plain")
-                if (activity?.packageManager?.resolveActivity(intent , 0) !=null){
-                    startActivity(intent)
-                }
+            if (activity?.packageManager?.resolveActivity(intent, 0) != null) {
+                startActivity(intent)
+            }
+        }
+
+        // Add navigation to toolbar
+        val toolbar: Toolbar = binding.toolBar
+        (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)!!
+        (activity as AppCompatActivity?)!!.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        toolbar.setNavigationOnClickListener() {
+            findNavController().navigate(MovieDetailsFragmentDirections.actionMovieDetailsFragmentToMoviesListFragment2())
         }
 
 
-        return binding.root    }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        return binding.root
+    }
+//  Reset details page
+    override fun onStop() {
+        super.onStop()
+        sharedViewModel.resetMovie()
 
     }
 

@@ -23,7 +23,7 @@ class MoviesListFragment : Fragment() {
 
     private var _binding: FragmentMoviesListBinding? = null
     private val binding get() = _binding!!
-    private val sharedViewModel : MoviesViewModel by activityViewModels()
+    private val sharedViewModel: MoviesViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,11 +50,11 @@ class MoviesListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+// click on  popUpList
         binding.sortList.setOnClickListener { showSortPopupMenu(binding.sortList) }
         binding.filterList.setOnClickListener { showFilterPopupMenu(binding.filterList) }
-
-        binding.search.setOnQueryTextListener (object : SearchView.OnQueryTextListener {
+// click on searchView
+        binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 if (query != null) {
                     val b =
@@ -67,9 +67,9 @@ class MoviesListFragment : Fragment() {
                         toast.show()
                     }
                 }
-                    return true
-                }
-
+                return true
+            }
+// when user click on cancel show the full list
             override fun onQueryTextChange(newText: String): Boolean {
                 sharedViewModel.showList()
                 return true
@@ -78,8 +78,8 @@ class MoviesListFragment : Fragment() {
         })
 
     }
-//
 
+//sort List
     private fun showSortPopupMenu(view: View) {
         val popup = PopupMenu(this.requireContext(), view)
         popup.inflate(R.menu.sort_menu)
@@ -91,15 +91,15 @@ class MoviesListFragment : Fragment() {
                 R.id.sort_alpha -> {
                     sharedViewModel.sortListAlpha()
                 }
-                R.id.release_date-> {
+                R.id.release_date -> {
                     sharedViewModel.sortListReleaseDate()
                 }
-                R.id.rate-> {
-                   sharedViewModel.sortListRate()
+                R.id.rate -> {
+                    sharedViewModel.sortListRate()
                 }
 
                 R.id.un_sorted -> {
-                   sharedViewModel.showList()
+                    sharedViewModel.showList()
                 }
 
             }
@@ -109,6 +109,7 @@ class MoviesListFragment : Fragment() {
 
         popup.show()
     }
+// Filter List
     private fun showFilterPopupMenu(view: View) {
         val popup = PopupMenu(this.requireContext(), view)
         popup.inflate(R.menu.filter_menu)
@@ -120,14 +121,14 @@ class MoviesListFragment : Fragment() {
                 R.id.filter_action -> {
                     sharedViewModel.updateFilter(MovieApiFilter.ACTION)
                 }
-                R.id.filter_animation-> {
+                R.id.filter_animation -> {
                     sharedViewModel.updateFilter(MovieApiFilter.ANIMATION)
                 }
-                R.id.filter_adventure-> {
+                R.id.filter_adventure -> {
                     sharedViewModel.updateFilter(MovieApiFilter.ADVENTURE)
                 }
 
-                R.id.show_all-> {
+                R.id.show_all -> {
                     sharedViewModel.getMoviesList()
                 }
 

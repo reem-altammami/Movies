@@ -15,27 +15,24 @@ import java.text.SimpleDateFormat
 import java.time.LocalDate
 
 
-enum class MoviesApiStatus{
-    LOADING,ERROR,DONE
+enum class MoviesApiStatus {
+    LOADING, ERROR, DONE
 }
-class MoviesViewModel : ViewModel() {
-    private val _movies = MutableLiveData<List<ResultsItem?>>()
 
-    // The external immutable LiveData for the request status
+class MoviesViewModel : ViewModel() {
+
+    private val _movies = MutableLiveData<List<ResultsItem?>>()
     var movies: MutableLiveData<List<ResultsItem?>> = _movies
 
     private val _status = MutableLiveData<MoviesApiStatus>()
-
-    // The external immutable LiveData for the request status
     val status: LiveData<MoviesApiStatus> = _status
-
 
 
     init {
         getMoviesList()
     }
-
-     fun getMoviesList() {
+// get movies from server
+    fun getMoviesList() {
         viewModelScope.launch {
             _status.value = MoviesApiStatus.LOADING
 
@@ -50,13 +47,14 @@ class MoviesViewModel : ViewModel() {
             }
         }
     }
-    fun getMovieGenre(filter: MovieApiFilter){
+// get movies from server by genre
+    fun getMovieGenre(filter: MovieApiFilter) {
 
         viewModelScope.launch {
-            try{
+            try {
                 val listMovieGenre = MoviesApi.retrofitService.getMoviesByGenre(filter.genre)
                 _movies.value = listMovieGenre.results
-            } catch (e: java.lang.Exception){
+            } catch (e: java.lang.Exception) {
 
             }
         }
@@ -66,7 +64,6 @@ class MoviesViewModel : ViewModel() {
     fun showList() {
         getMoviesList()
     }
-
 
 
     fun search(movieName: String) {
@@ -89,12 +86,12 @@ class MoviesViewModel : ViewModel() {
 
     fun sortListReleaseDate() {
         val sortedList =
-            movies.value?.sortedBy { SimpleDateFormat("yyyy-MM-dd").parse(it?.releaseDate!!) }
+            movies.value?.sortedByDescending { SimpleDateFormat("yyyy-MM-dd").parse(it?.releaseDate!!) }
         _movies.value = sortedList
     }
 
 
-    fun updateFilter(filter:MovieApiFilter){
+    fun updateFilter(filter: MovieApiFilter) {
         getMovieGenre(filter)
     }
 }

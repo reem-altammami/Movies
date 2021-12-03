@@ -10,7 +10,6 @@
         <entry key="..\:/Movies/app/src/main/res/layout/grid_view_item.xml" value="0.1639773222852159" />
         <entry key="..\:/Movies/app/src/main/res/menu/filter_menu.xml" value="0.2857142857142857" />
         <entry key="..\:/Movies/app/src/main/res/menu/sort_menu.xml" value="0.115625" />
-        <entry key="..\:/Users/kaled/AndroidStudioProjects/Movies/app/src/main/res/layout/fragment_movie_details.xml" value="0.42722117202268434" />
       </map>
     </option>
   </component>
@@ -19,5 +18,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.23581560283687944" />
+      </ProjectState>
+    </option>
   </component>
 </project>

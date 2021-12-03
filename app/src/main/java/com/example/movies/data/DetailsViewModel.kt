@@ -13,19 +13,15 @@ import com.example.movies.network.MoviesApi
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 
-class DetailsViewModel:ViewModel (){
+class DetailsViewModel : ViewModel() {
 
-    // The external immutable LiveData for the request status
     private val _status = MutableLiveData<MoviesApiStatus>()
-
     val status: LiveData<MoviesApiStatus> = _status
 
     private val _movieDetails = MutableLiveData<Movie?>()
-
     var movieDetails: MutableLiveData<Movie?> = _movieDetails
 
-
-
+// get more details from server by movie id
     fun getMovieDetails(id: Int) {
         Log.e("TAG", "getMovieDetails out  lan out try:${id}")
         viewModelScope.launch {
@@ -53,4 +49,7 @@ class DetailsViewModel:ViewModel (){
 ////        setGenre(position)
 //    }
 
+    fun resetMovie() {
+        _movieDetails.value = Movie()
+    }
 }
