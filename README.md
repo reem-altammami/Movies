@@ -1,10 +1,10 @@
-#Movies App 
+# Movies App 
 
 This apllication retrive data from "https://www.themoviedb.org/" by using Movie DB API.
 
 
 
-App functions:
+# App functions:
 1. Retrive popular Movies.
 2. Applying sort movies on local data by relase date , alphabitiacl and rate. 
 3. Applying search on local data. 
